@@ -21,11 +21,10 @@ class TodoItem extends Component {
 
   onBlur = (event, id) => {
     const { editValue } = this.state
-    if (editValue) {
-      this.submitEdit(id, event.target.value)
-    } else {
-      this.cancelEdit()
+    if (!editValue) {
+      return this.props.removeTodo(id)
     }
+    this.submitEdit(id, event.target.value)
   }
 
   onKeyDown = (event, id) => {
@@ -70,7 +69,7 @@ class TodoItem extends Component {
           type="text"
           className="edit"
           value={editValue}
-          onChange={(event) => this.onChange(event, id)}
+          onChange={this.onChange}
           onBlur={(event) => this.onBlur(event, id)}
           onKeyDown={(event) => this.onKeyDown(event, id)}
         />
