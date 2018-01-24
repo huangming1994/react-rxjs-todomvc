@@ -3,7 +3,7 @@ import TodoItem from './TodoItem'
 
 const TodoList = (props) => (
   <section className="main">
-    <input type="checkbox" className="toggle-all" onChange={() => {}} />
+    <input type="checkbox" className="toggle-all" onChange={props.toggleAll}/>
     <ul className="todo-list">
       {props.todos.map(todo =>
         <TodoItem
