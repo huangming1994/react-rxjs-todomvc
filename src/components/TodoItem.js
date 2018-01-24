@@ -28,8 +28,11 @@ class TodoItem extends Component {
   }
 
   onKeyDown = (event, id) => {
-    if (event.keyCode === ESC_KEY_CODE) return this.cancelEdit()
-    if (event.keyCode === ENTER_KEY_CODE) return this.submitEdit(id, event.target.value)
+    if (event.keyCode === ESC_KEY_CODE) {
+      this.setState({ editValue: this.props.todo.title }) // If change the value and press the `ESC`, we need to restore the value
+      this.cancelEdit()
+    }
+    if (event.keyCode === ENTER_KEY_CODE) this.submitEdit(id, event.target.value)
   }
 
   cancelEdit = () => this.setState({ editing: false })
