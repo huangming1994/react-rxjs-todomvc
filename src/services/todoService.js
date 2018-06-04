@@ -8,7 +8,7 @@ const initialTodos = JSON.parse(localStorage.getItem('todos') || '[]')
 
 class TodoService {
   constructor() {
-    this.update$ = new BehaviorSubject(todos => todos)
+    this.update$ = new BehaviorSubject(initialTodos)
     this.addTodo$ = new Subject()
     this.removeTodo$ = new Subject()
     this.updateTodo$ = new Subject()
@@ -17,7 +17,7 @@ class TodoService {
     this.clearCompleted$ = new Subject()
 
     this.todos$ = this.update$
-      .scan((todos, operation) => operation(todos), initialTodos)
+      .scan((todos, operation) => operation(todos))
       .publishReplay(1)
       .refCount()
 
